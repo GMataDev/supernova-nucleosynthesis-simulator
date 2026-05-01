@@ -9,7 +9,7 @@
     
     <style>
         :root {
-            --primary-color: #00ffff; /* Estética Cyan/Cyberpunk */
+            --primary-color: #00ffff;
             --bg-dark: #020813;
             --card-bg: rgba(10, 25, 47, 0.7);
             --text-color: #e6f1ff;
@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* Estrellas animadas de fondo */
         #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; transform: scale(1.2); } }
@@ -61,7 +60,6 @@
             gap: 12px;
         }
 
-        /* Multimedia y Visores */
         .media-wrapper { text-align: center; }
         video { 
             width: 100%; 
@@ -70,6 +68,8 @@
             border-radius: 10px; 
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); 
         }
+
+        /* Ajuste de IFRAME para escritorio */
         iframe { 
             width: 100%; 
             height: 700px; 
@@ -79,7 +79,16 @@
             background: #fff;
         }
 
-        /* Botones Estilizados */
+        /* Mensaje de vista móvil (Oculto por defecto) */
+        .mobile-pdf-link {
+            display: none;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px dashed var(--primary-color);
+            margin: 15px 0;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -97,14 +106,12 @@
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-color); }
 
-        /* Estilos de la Sección de Créditos */
         .credits-list { list-style: none; padding: 0; }
         .credits-item { margin-bottom: 25px; border-left: 3px solid var(--primary-color); padding-left: 15px; }
         .credits-role { font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.85rem; }
         .credits-name { font-size: 1.15rem; color: #fff; display: block; margin-bottom: 5px; }
         .credits-desc { font-size: 0.95rem; color: #8892b0; line-height: 1.5; margin: 0; }
 
-        /* Footer */
         footer { 
             text-align: center; 
             padding: 60px 20px; 
@@ -116,16 +123,21 @@
         .profile-username { color: var(--primary-color); font-size: 1.6rem; font-weight: bold; margin-bottom: 5px; letter-spacing: 1px; }
         .profile-fullname { font-size: 1.25rem; color: #fff; margin-bottom: 15px; font-weight: 300; }
         .profile-desc { color: #8892b0; margin: 15px 0; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-        .contact { color: var(--primary-color); text-decoration: none; font-weight: bold; transition: opacity 0.3s; }
-        .contact:hover { opacity: 0.8; }
+        .contact { color: var(--primary-color); text-decoration: none; font-weight: bold; }
 
-        /* Adaptación para Dispositivos Móviles (QR Scans) */
+        /* --- ARREGLO PARA MÓVILES --- */
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             .container { margin: 20px auto; gap: 25px; width: 95%; }
             .card { padding: 25px 20px; }
-            iframe { height: 450px; }
-            .btn { width: 100%; box-sizing: border-box; }
+            
+            /* Ocultamos el iframe que da problemas en móvil */
+            iframe { display: none; } 
+            
+            /* Mostramos el link alternativo */
+            .mobile-pdf-link { display: block; text-align: center; }
+            
+            .btn { width: 100%; box-sizing: border-box; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -133,19 +145,16 @@
     <div id="stars-container"></div>
 
     <div class="container">
-        <!-- Encabezado con Icono Meteor -->
         <header>
             <h1><i class="fa-solid fa-meteor"></i> Simulación: Nucleosíntesis Estelar</h1>
             <p style="color: #8892b0; font-style: italic;">"Somos polvo de estrellas que la química orgánica llevó a la vida"</p>
         </header>
 
-        <!-- Introducción -->
         <section class="card">
             <h2><i class="fa-solid fa-book-sparkles"></i> Introducción al Proyecto</h2>
-            <p>Este proyecto, presentado en la <strong>XXXIV Feria de las Ciencias de la UNAM</strong>, demuestra que las supernovas son el mecanismo primordial de enriquecimiento químico del universo, forjando elementos esenciales como el carbono, oxígeno y hierro.</p>
+            <p>Este proyecto, presentado en la <strong>XXXIV Feria de las Ciencias de la UNAM</strong>, demuestra que las supernovas son el mecanismo primordial de enriquecimiento químico del universo.</p>
         </section>
 
-        <!-- Video de Demostración -->
         <div class="media-wrapper">
             <video controls autoplay loop muted>
                 <source src="media/demo.mp4" type="video/mp4">
@@ -153,7 +162,6 @@
             <p style="color: #8892b0; margin-top: 15px;"><i class="fa-solid fa-play-circle"></i> Demostración del simulador de supernovas</p>
         </div>
 
-        <!-- Enlace a GitHub -->
         <section class="card" style="text-align: center;">
             <h2><i class="fa-brands fa-github"></i> Repositorio en GitHub</h2>
             <p>Si quieres ver completamente el simulador, el código <strong>Python</strong> está disponible en el repositorio oficial.</p>
@@ -162,11 +170,20 @@
             </a>
         </section>
 
-        <!-- Sección del Póster -->
+        <!-- Póster corregido para móvil -->
         <section class="card">
             <h2><i class="fa-solid fa-display"></i> Póster de la Feria</h2>
             <p>Visualiza el póster científico oficial maquetado en LaTeX.</p>
-            <iframe src="poster_feria.pdf"></iframe>
+            
+            <iframe src="poster_feria.pdf#view=FitH"></iframe>
+            
+            <div class="mobile-pdf-link">
+                <p><i class="fa-solid fa-mobile-screen"></i> Para una mejor lectura en celular:</p>
+                <a href="poster_feria.pdf" target="_blank" class="btn">
+                    <i class="fa-solid fa-expand"></i> Abrir Póster pantalla completa
+                </a>
+            </div>
+
             <div style="text-align: center;">
                 <a href="poster_feria.pdf" download class="btn">
                     <i class="fa-solid fa-download"></i> Descargar Póster
@@ -174,47 +191,54 @@
             </div>
         </section>
 
-        <!-- Investigación Completa -->
+        <!-- Investigación corregida para móvil -->
         <section class="card">
             <h2><i class="fa-solid fa-file-pdf"></i> Investigación Completa</h2>
             <p>Consulta la investigación presentada en la Feria de Ciencias.</p>
-            <iframe src="supernova_research.pdf"></iframe>
+            
+            <iframe src="media/supernova_research.pdf#view=FitH"></iframe>
+            
+            <div class="mobile-pdf-link">
+                <p><i class="fa-solid fa-mobile-screen"></i> Para una mejor lectura en celular:</p>
+                <a href="media/supernova_research.pdf" target="_blank" class="btn">
+                    <i class="fa-solid fa-file-lines"></i> Abrir investigación pantalla completa
+                </a>
+            </div>
+
             <div style="text-align: center;">
-                <a href="supernova_research.pdf" download class="btn">
-                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF de Investigación
+                <a href="media/supernova_research.pdf" download class="btn">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF
                 </a>
             </div>
         </section>
 
-        <!-- Sección de Créditos y Colaboradores -->
         <section class="card">
             <h2><i class="fa-solid fa-users-gear"></i> Créditos y Colaboradores</h2>
             <ul class="credits-list">
                 <li class="credits-item">
                     <span class="credits-role">Asesoría, Dirección y Apoyo Logístico</span>
                     <span class="credits-name">Prof. Juana Leticia Rivera Ramírez</span>
-                    <p class="credits-desc">Guía fundamental desde el taller de astronomía, asesoría presencial durante la XXXIV Feria de las Ciencias y apoyo esencial en la gestión y compra de materiales para el proyecto.</p>
+                    <p class="credits-desc">Guía fundamental desde el taller de astronomía, asesoría presencial durante la XXXIV Feria de las Ciencias y apoyo esencial en la gestión de materiales.</p>
                 </li>
                 <li class="credits-item">
                     <span class="credits-role">Investigación Documental y Exposición</span>
                     <span class="credits-name">Vanessa Zahid Domínguez García</span>
-                    <p class="credits-desc">Desarrollo de la investigación teórica, revisión minuciosa de archivos para retroalimentación y labor de exposición conjunta durante la feria.</p>
+                    <p class="credits-desc">Desarrollo de la investigación teórica, revisión de archivos y labor de exposición pública del proyecto.</p>
                 </li>
                 <li class="credits-item">
                     <span class="credits-role">Jefe de Programación y Desarrollo Técnico</span>
                     <span class="credits-name">Gustavo Mata Batalla</span>
-                    <p class="credits-desc">Diseño y programación del simulador de supernovas en Python, estructuración de los documentos de investigación, maquetación del póster en LaTeX y diseño de la interfaz web.</p>
+                    <p class="credits-desc">Diseño y programación del simulador en Python, maquetación en LaTeX y diseño de la interfaz web.</p>
                 </li>
                 <li class="credits-item">
                     <span class="credits-role">Asistencia en Desarrollo UI/UX</span>
                     <span class="credits-name">Gemini (Google AI)</span>
-                    <p class="credits-desc">Implementación del código frontend bajo la dirección, estructuración y revisión técnica rigurosa de Gustavo Mata Batalla.</p>
+                    <p class="credits-desc">Implementación del código frontend bajo la dirección técnica de Gustavo Mata Batalla.</p>
                 </li>
             </ul>
         </section>
     </div>
 
-    <!-- Pie de Página Profesional -->
     <footer>
         <div class="profile-username"><i class="fa-solid fa-terminal"></i> GMataDev</div>
         <div class="profile-fullname">Gustavo Mata Batalla</div>
@@ -230,7 +254,6 @@
         </p>
     </footer>
 
-    <!-- Lógica de Fondo de Estrellas -->
     <script>
         const container = document.getElementById('stars-container');
         for (let i = 0; i < 150; i++) {
