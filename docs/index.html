@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GMataDev | Supernova Simulator</title>
+    <!-- Importando librería de íconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary-color: #00ffff; /* Regreso al Cyan */
+            --primary-color: #00ffff; /* Estética Cyan/Cyberpunk */
             --bg-dark: #020813;
             --card-bg: rgba(10, 25, 47, 0.7);
             --text-color: #e6f1ff;
@@ -23,12 +26,19 @@
             overflow-x: hidden;
         }
 
-        /* Estrellas animadas */
+        /* Estrellas animadas de fondo */
         #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; transform: scale(1.2); } }
 
-        .container { max-width: 1000px; width: 90%; margin: 50px auto; display: flex; flex-direction: column; gap: 40px; }
+        .container { 
+            max-width: 1000px; 
+            width: 90%; 
+            margin: 50px auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 40px; 
+        }
 
         header { text-align: center; border-bottom: 1px solid var(--primary-color); padding-bottom: 20px; }
         h1 { font-size: 2.5rem; color: var(--primary-color); text-shadow: 0 0 15px rgba(0, 255, 255, 0.4); margin: 0; }
@@ -42,16 +52,39 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        h2 { color: var(--primary-color); border-bottom: 1px solid rgba(0, 255, 255, 0.1); padding-bottom: 10px; }
+        h2 { 
+            color: var(--primary-color); 
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1); 
+            padding-bottom: 10px; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-        /* Multimedia */
+        /* Multimedia y Visores */
         .media-wrapper { text-align: center; }
-        video { width: 100%; max-width: 850px; border: 2px solid var(--primary-color); border-radius: 10px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); }
-        iframe { width: 100%; height: 700px; border: 1px solid var(--primary-color); border-radius: 10px; margin-top: 15px; }
+        video { 
+            width: 100%; 
+            max-width: 850px; 
+            border: 2px solid var(--primary-color); 
+            border-radius: 10px; 
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); 
+        }
+        iframe { 
+            width: 100%; 
+            height: 700px; 
+            border: 1px solid var(--primary-color); 
+            border-radius: 10px; 
+            margin-top: 15px; 
+            background: #fff;
+        }
 
-        /* Botones */
+        /* Botones Estilizados */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             background: transparent;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
@@ -64,67 +97,140 @@
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-color); }
 
+        /* Estilos de la Sección de Créditos */
+        .credits-list { list-style: none; padding: 0; }
+        .credits-item { margin-bottom: 25px; border-left: 3px solid var(--primary-color); padding-left: 15px; }
+        .credits-role { font-weight: bold; color: var(--primary-color); display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.85rem; }
+        .credits-name { font-size: 1.15rem; color: #fff; display: block; margin-bottom: 5px; }
+        .credits-desc { font-size: 0.95rem; color: #8892b0; line-height: 1.5; margin: 0; }
+
         /* Footer */
         footer { 
             text-align: center; 
             padding: 60px 20px; 
-            background: rgba(0, 0, 0, 0.4); 
+            background: rgba(0, 0, 0, 0.6); 
             width: 100%; 
             border-top: 1px solid rgba(0, 255, 255, 0.2);
+            box-sizing: border-box;
         }
-        .profile-name { color: var(--primary-color); font-size: 1.5rem; font-weight: bold; }
-        .profile-desc { color: #8892b0; margin: 15px 0; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .contact { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        .profile-username { color: var(--primary-color); font-size: 1.6rem; font-weight: bold; margin-bottom: 5px; letter-spacing: 1px; }
+        .profile-fullname { font-size: 1.25rem; color: #fff; margin-bottom: 15px; font-weight: 300; }
+        .profile-desc { color: #8892b0; margin: 15px 0; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .contact { color: var(--primary-color); text-decoration: none; font-weight: bold; transition: opacity 0.3s; }
+        .contact:hover { opacity: 0.8; }
+
+        /* Adaptación para Dispositivos Móviles (QR Scans) */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .container { margin: 20px auto; gap: 25px; width: 95%; }
+            .card { padding: 25px 20px; }
+            iframe { height: 450px; }
+            .btn { width: 100%; box-sizing: border-box; }
+        }
     </style>
 </head>
 <body>
     <div id="stars-container"></div>
 
     <div class="container">
+        <!-- Encabezado con Icono Meteor -->
         <header>
-            <h1>Simulación: Nucleosíntesis Estelar</h1>
-            <p style="color: #8892b0;">"Somos polvo de estrellas que la química orgánica llevó a la vida"</p>
+            <h1><i class="fa-solid fa-meteor"></i> Simulación: Nucleosíntesis Estelar</h1>
+            <p style="color: #8892b0; font-style: italic;">"Somos polvo de estrellas que la química orgánica llevó a la vida"</p>
         </header>
 
+        <!-- Introducción -->
         <section class="card">
-            <h2>Introducción al Proyecto</h2>
+            <h2><i class="fa-solid fa-book-sparkles"></i> Introducción al Proyecto</h2>
             <p>Este proyecto, presentado en la <strong>XXXIV Feria de las Ciencias de la UNAM</strong>, demuestra que las supernovas son el mecanismo primordial de enriquecimiento químico del universo, forjando elementos esenciales como el carbono, oxígeno y hierro.</p>
         </section>
 
+        <!-- Video de Demostración -->
         <div class="media-wrapper">
             <video controls autoplay loop muted>
                 <source src="media/demo.mp4" type="video/mp4">
             </video>
-            <p style="color: #8892b0; margin-top: 15px;">Demostración del simulador de supernovas</p>
+            <p style="color: #8892b0; margin-top: 15px;"><i class="fa-solid fa-play-circle"></i> Demostración del simulador de supernovas</p>
         </div>
 
+        <!-- Enlace a GitHub -->
         <section class="card" style="text-align: center;">
-            <h2>Repositorio en GitHub</h2>
-            <p>Si quieres ver completamente el simulador, el código <strong>Python</strong> está disponible en el GitHub oficial del proyecto.</p>
-            <a href="https://github.com/GMataDev/supernova-nucleosynthesis-simulator" class="btn" target="_blank">Explorar Código</a>
+            <h2><i class="fa-brands fa-github"></i> Repositorio en GitHub</h2>
+            <p>Si quieres ver completamente el simulador, el código <strong>Python</strong> está disponible en el repositorio oficial.</p>
+            <a href="https://github.com/GMataDev/supernova-nucleosynthesis-simulator" class="btn" target="_blank">
+                <i class="fa-brands fa-github"></i> Explorar Código
+            </a>
         </section>
 
+        <!-- Sección del Póster -->
         <section class="card">
-            <h2>Investigación Completa</h2>
-            <p>Consulta la investigación completa.</p>
+            <h2><i class="fa-solid fa-display"></i> Póster de la Feria</h2>
+            <p>Visualiza el póster científico oficial maquetado en LaTeX.</p>
+            <iframe src="poster_feria.pdf"></iframe>
+            <div style="text-align: center;">
+                <a href="poster_feria.pdf" download class="btn">
+                    <i class="fa-solid fa-download"></i> Descargar Póster
+                </a>
+            </div>
+        </section>
+
+        <!-- Investigación Completa -->
+        <section class="card">
+            <h2><i class="fa-solid fa-file-pdf"></i> Investigación Completa</h2>
+            <p>Consulta la investigación presentada en la Feria de Ciencias.</p>
             <iframe src="supernova_research.pdf"></iframe>
             <div style="text-align: center;">
-                <a href="supernova_research.pdf" download class="btn">Descargar PDF de Investigación</a>
+                <a href="supernova_research.pdf" download class="btn">
+                    <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF de Investigación
+                </a>
             </div>
+        </section>
+
+        <!-- Sección de Créditos y Colaboradores -->
+        <section class="card">
+            <h2><i class="fa-solid fa-users-gear"></i> Créditos y Colaboradores</h2>
+            <ul class="credits-list">
+                <li class="credits-item">
+                    <span class="credits-role">Asesoría, Dirección y Apoyo Logístico</span>
+                    <span class="credits-name">Prof. Juana Leticia Rivera Ramírez</span>
+                    <p class="credits-desc">Guía fundamental desde el taller de astronomía, asesoría presencial durante la XXXIV Feria de las Ciencias y apoyo esencial en la gestión y compra de materiales para el proyecto.</p>
+                </li>
+                <li class="credits-item">
+                    <span class="credits-role">Investigación Documental y Exposición</span>
+                    <span class="credits-name">Vanessa Zahid Domínguez García</span>
+                    <p class="credits-desc">Desarrollo de la investigación teórica, revisión minuciosa de archivos para retroalimentación y labor de exposición conjunta durante la feria.</p>
+                </li>
+                <li class="credits-item">
+                    <span class="credits-role">Director de Proyecto y Desarrollo Técnico</span>
+                    <span class="credits-name">Gustavo Mata Batalla</span>
+                    <p class="credits-desc">Diseño y programación del simulador de supernovas (C++/CUDA), estructuración de los documentos de investigación, maquetación del póster en LaTeX y diseño de la interfaz web.</p>
+                </li>
+                <li class="credits-item">
+                    <span class="credits-role">Asistencia en Desarrollo UI/UX</span>
+                    <span class="credits-name">Gemini (Google AI)</span>
+                    <p class="credits-desc">Implementación del código frontend bajo la dirección, estructuración y revisión técnica rigurosa de Gustavo Mata Batalla.</p>
+                </li>
+            </ul>
         </section>
     </div>
 
+    <!-- Pie de Página Profesional -->
     <footer>
-        <div class="profile-name">GMataDev</div>
+        <div class="profile-username"><i class="fa-solid fa-terminal"></i> GMataDev</div>
+        <div class="profile-fullname">Gustavo Mata Batalla</div>
         <div class="profile-desc">
             CS Student @ UNAM | C++ & High-Performance Computing Enthusiast | Astrophysics
         </div>
-        <div style="margin-top: 10px;">
-            Contacto: <a href="mailto:mata.gustavo.dev@gmail.com" class="contact">mata.gustavo.dev@gmail.com</a>
+        <div style="margin-top: 15px;">
+            <i class="fa-solid fa-envelope" style="color: var(--primary-color);"></i> 
+            <a href="mailto:mata.gustavo.dev@gmail.com" class="contact">mata.gustavo.dev@gmail.com</a>
         </div>
-        <p style="font-size: 0.8rem; color: #444; margin-top: 30px;">CCH Naucalpan - Universidad Nacional Autónoma de México</p>
+        <p style="font-size: 0.85rem; color: #555; margin-top: 35px; letter-spacing: 1px;">
+            <i class="fa-solid fa-building-columns"></i> CCH NAUCALPAN - UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+        </p>
     </footer>
 
+    <!-- Lógica de Fondo de Estrellas -->
     <script>
         const container = document.getElementById('stars-container');
         for (let i = 0; i < 150; i++) {
