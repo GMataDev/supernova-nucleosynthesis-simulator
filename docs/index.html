@@ -3,20 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Supernovas - Demo</title>
+    <title>GMataDev | Supernova Simulator</title>
     <style>
-        body { background-color: #000; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        video { max-width: 90%; border: 2px solid #00ffff; border-radius: 10px; box-shadow: 0 0 20px #00ffff; }
-        h1 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        :root {
+            --primary-color: #00ffff; /* Regreso al Cyan */
+            --bg-dark: #020813;
+            --card-bg: rgba(10, 25, 47, 0.7);
+            --text-color: #e6f1ff;
+        }
+
+        body {
+            background: radial-gradient(circle at center top, #05162a 0%, var(--bg-dark) 100%);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Estrellas animadas */
+        #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; transform: scale(1.2); } }
+
+        .container { max-width: 1000px; width: 90%; margin: 50px auto; display: flex; flex-direction: column; gap: 40px; }
+
+        header { text-align: center; border-bottom: 1px solid var(--primary-color); padding-bottom: 20px; }
+        h1 { font-size: 2.5rem; color: var(--primary-color); text-shadow: 0 0 15px rgba(0, 255, 255, 0.4); margin: 0; }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(0, 255, 255, 0.2); 
+            border-radius: 15px; 
+            padding: 35px; 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 { color: var(--primary-color); border-bottom: 1px solid rgba(0, 255, 255, 0.1); padding-bottom: 10px; }
+
+        /* Multimedia */
+        .media-wrapper { text-align: center; }
+        video { width: 100%; max-width: 850px; border: 2px solid var(--primary-color); border-radius: 10px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); }
+        iframe { width: 100%; height: 700px; border: 1px solid var(--primary-color); border-radius: 10px; margin-top: 15px; }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn:hover { background: var(--primary-color); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-color); }
+
+        /* Footer */
+        footer { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: rgba(0, 0, 0, 0.4); 
+            width: 100%; 
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .profile-name { color: var(--primary-color); font-size: 1.5rem; font-weight: bold; }
+        .profile-desc { color: #8892b0; margin: 15px 0; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .contact { color: var(--primary-color); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Simulación: Nucleosíntesis Estelar</h1>
-    <!-- Cambia 'tu-video.mp4' por el nombre real de tu video subido -->
-    <video controls autoplay loop muted playsinline>
-        <source src="media/demo.mp4" type="video/mp4">
-        Tu navegador no soporta videos.
-    </video>
-    <p style="margin-top: 20px; color: #888;">Proyecto de Computación de Alto Rendimiento</p>
+    <div id="stars-container"></div>
+
+    <div class="container">
+        <header>
+            <h1>Simulación: Nucleosíntesis Estelar</h1>
+            <p style="color: #8892b0;">"Somos polvo de estrellas que la química orgánica llevó a la vida"</p>
+        </header>
+
+        <section class="card">
+            <h2>Introducción al Proyecto</h2>
+            <p>Este proyecto, presentado en la <strong>XXXIV Feria de las Ciencias de la UNAM</strong>, demuestra que las supernovas son el mecanismo primordial de enriquecimiento químico del universo, forjando elementos esenciales como el carbono, oxígeno y hierro.</p>
+        </section>
+
+        <div class="media-wrapper">
+            <video controls autoplay loop muted>
+                <source src="media/demo.mp4" type="video/mp4">
+            </video>
+            <p style="color: #8892b0; margin-top: 15px;">Demostración del simulador de supernovas</p>
+        </div>
+
+        <section class="card" style="text-align: center;">
+            <h2>Repositorio en GitHub</h2>
+            <p>Si quieres ver completamente el simulador, el código <strong>Python</strong> está disponible en el GitHub oficial del proyecto.</p>
+            <a href="https://github.com/GMataDev/supernova-nucleosynthesis-simulator" class="btn" target="_blank">Explorar Código</a>
+        </section>
+
+        <section class="card">
+            <h2>Investigación Completa</h2>
+            <p>Consulta la investigación completa.</p>
+            <iframe src="media/supernova_research.pdf"></iframe>
+            <div style="text-align: center;">
+                <a href="supernova_research.pdf" download class="btn">Descargar PDF de Investigación</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="profile-name">GMataDev</div>
+        <div class="profile-desc">
+            CS Student @ UNAM | C++ & High-Performance Computing Enthusiast | Astrophysics
+        </div>
+        <div style="margin-top: 10px;">
+            Contacto: <a href="mailto:mata.gustavo.dev@gmail.com" class="contact">mata.gustavo.dev@gmail.com</a>
+        </div>
+        <p style="font-size: 0.8rem; color: #444; margin-top: 30px;">CCH Naucalpan - Universidad Nacional Autónoma de México</p>
+    </footer>
+
+    <script>
+        const container = document.getElementById('stars-container');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+            container.appendChild(star);
+        }
+    </script>
 </body>
 </html>
