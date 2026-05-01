@@ -1,6 +1,7 @@
 # Supernova Nucleosynthesis Simulator
 
 Este proyecto es un simulador computacional desarrollado para la **XXXIV Feria de las Ciencias de la UNAM**, donde ganó el **Segundo Lugar** en la Modalidad de **Física**. 
+ Página Web: https://gmatadev.github.io/supernova-nucleosynthesis-simulator/
 
 ## Descripción
 El programa modela la **explosión** de una supernova, la posterior creación de **elementos químicos (nucleosíntesis)** y genera una gráfica de la **Curva de Luz** de la Supernova Simulada.
